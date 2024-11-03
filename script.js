@@ -59,3 +59,9 @@ const remove_active = () => {
     btn.classList.remove("active");
   });
 };
+
+let currentInput = "";
+function backspace() {
+  currentInput = currentInput.slice(0, -1);
+  display.textContent = currentInput;
+}
