@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #f4f4f4;
+        font-family: Arial, sans-serif;
+      }
+
+      .calculator {
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+      }
+
+      .display {
+        width: 200px;
+        height: 50px;
+        margin-bottom: 20px;
+        text-align: right;
+        border: 1px solid #ccc;
+        padding: 10px;
+        font-size: 24px;
+        border-radius: 5px;
+      }
+
+      .buttons {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 10px;
+      }
+
+      .button {
+        padding: 20px;
+        font-size: 18px;
+        background-color: #e0e0e0;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      .button:active {
+        background-color: #ccc;
+      }
+    </style>
+    <title>Simple Calculator</title>
+  </head>
+  <body>
+    <div class="calculator">
+      <div class="display" id="display"></div>
+      <div class="buttons">
+        <button class="button" onclick="appendNumber('7')">7</button>
+        <button class="button" onclick="appendNumber('8')">8</button>
+        <button class="button" onclick="appendNumber('9')">9</button>
+        <button class="button" onclick="setOperator('+')">+</button>
+        <button class="button" onclick="appendNumber('4')">4</button>
+        <button class="button" onclick="appendNumber('5')">5</button>
+        <button class="button" onclick="appendNumber('6')">6</button>
+        <button class="button" onclick="setOperator('-')">-</button>
+        <button class="button" onclick="appendNumber('1')">1</button>
+        <button class="button" onclick="appendNumber('2')">2</button>
+        <button class="button" onclick="appendNumber('3')">3</button>
+        <button class="button" onclick="setOperator('')"></button>
+        <button class="button" onclick="appendNumber('0')">0</button>
+        <button class="button" onclick="appendNumber('.')">.</button>
+        <button class="button" onclick="calculate()">=</button>
+        <button class="button" onclick="setOperator('/')">/</button>
+        <button class="button" onclick="clearDisplay()">C</button>
+        <button class="button" onclick="clearEverything()">CE</button>
+        <button class="button" onclick="backspace()">⌫</button>
+      </div>
+    </div>
+
+    <script>
+      let display = document.getElementById("display");
+      let currentInput = "";
+      let operator = "";
+      let previousInput = "";
+
+      function appendNumber(number) {
+        currentInput += number;
+        display.textContent = currentInput;
+      }
+
+      function setOperator(op) {
+        operator = op;
+        previousInput = currentInput;
+        currentInput = "";
+      }
+
+      function calculate() {
+        if (operator && previousInput !== "" && currentInput !== "") {
+          let result;
+          switch (operator) {
+            case "+":
+              result = parseFloat(previousInput) + parseFloat(currentInput);
+              break;
+            case "-":
+              result = parseFloat(previousInput) - parseFloat(currentInput);
+              break;
+            case "*":
+              result = parseFloat(previousInput) * parseFloat(currentInput);
+              break;
+            case "/":
+              result = parseFloat(previousInput) / parseFloat(currentInput);
+              break;
+            default:
+              break;
+          }
+          display.textContent = result;
+          currentInput = result;
+          operator = "";
+          previousInput = "";
+        }
+      }
+
+      function clearDisplay() {
+        display.textContent = "";
+        currentInput = "";
+      }
+
+      function clearEverything() {
+        display.textContent = "";
+        currentInput = "";
+        operator = "";
+        previousInput = "";
+      }
+
+      function backspace() {
+        currentInput = currentInput.slice(0, -1);
+        display.textContent = currentInput;
+      }
+    </script>
+  </body>
+</html>
