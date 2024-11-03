@@ -42,12 +42,30 @@ body {
   border: none;
   border-radius: 15px;
   cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+}
+.btn:hover {
+  transform: translate(2px, 3px);
+  background-color: rgba(59, 59, 59, 0.856);
 }
 
 .gray-box {
   background-color: rgb(51, 51, 51);
 }
 
+.gray-box:hover {
+  background-color: rgba(124, 124, 124, 0.884);
+}
+
 .orange-box {
   background-color: orange;
+}
+
+.orange-box:hover {
+  background-color: rgba(255, 166, 0, 0.733);
+}
+
+.btn.active {
+  background-color: #ffffff;
+  color: #f69906;
 }
